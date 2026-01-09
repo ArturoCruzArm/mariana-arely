@@ -2,12 +2,12 @@
 // SELECTOR DE FOTOS - XV AÑOS MARIANA & ARELI
 // ========================================
 
-const TOTAL_PHOTOS = 457;
+const TOTAL_PHOTOS = 460;
 const STORAGE_KEY = 'mariana_areli_xv_photo_selections';
 
 // Lista completa de fotos
 const photos = [
-    'imagenes/DSC_5697.webp', 'imagenes/DSC_5698.webp', 'imagenes/DSC_5702.webp', 'imagenes/DSC_5705.webp',
+    'imagenes/DSC_5698.webp', 'imagenes/DSC_5702.webp', 'imagenes/DSC_5705.webp',
     'imagenes/DSC_5706.webp', 'imagenes/DSC_5708.webp', 'imagenes/DSC_5709.webp', 'imagenes/DSC_5710.webp',
     'imagenes/DSC_5711.webp', 'imagenes/DSC_5719.webp', 'imagenes/DSC_5721.webp', 'imagenes/DSC_5723.webp',
     'imagenes/DSC_5724.webp', 'imagenes/DSC_5725.webp', 'imagenes/DSC_5727.webp', 'imagenes/DSC_5729.webp',
@@ -121,7 +121,8 @@ const photos = [
     'imagenes/IMG_5663.webp', 'imagenes/IMG_5669.webp', 'imagenes/IMG_5673.webp', 'imagenes/IMG_5674.webp',
     'imagenes/IMG_5681.webp', 'imagenes/IMG_5691.webp', 'imagenes/IMG_5710.webp', 'imagenes/IMG_5717.webp',
     'imagenes/IMG_5718.webp', 'imagenes/IMG_5722.webp', 'imagenes/IMG_5725.webp', 'imagenes/IMG_5726.webp',
-    'imagenes/IMG_5728.webp', 'imagenes/IMG_5730.webp', 'imagenes/IMG_5732.webp', 'imagenes/IMG_5734.webp'
+    'imagenes/IMG_5728.webp', 'imagenes/IMG_5730.webp', 'imagenes/IMG_5732.webp', 'imagenes/IMG_5734.webp',
+    'imagenes/DJI_1100.webp', 'imagenes/DJI_1101.webp', 'imagenes/DJI_1102.webp', 'imagenes/DJI_1103.webp'
 ];
 
 // LIMITS

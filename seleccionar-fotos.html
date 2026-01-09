@@ -633,18 +633,18 @@
                         <div class="stat-icon"><i class="far fa-circle"></i></div>
                         <div class="stat-info">
                             <h3>Sin Clasificar</h3>
-                            <p class="stat-count" id="countSinClasificar">457</p>
+                            <p class="stat-count" id="countSinClasificar">460</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="action-buttons">
-                    <button class="btn btn-filter active" id="btnFilterAll">Todas (457)</button>
+                    <button class="btn btn-filter active" id="btnFilterAll">Todas (460)</button>
                     <button class="btn btn-filter" id="btnFilterImpresion">Impresión (0)</button>
                     <button class="btn btn-filter" id="btnFilterRedesSociales">Redes Sociales (0)</button>
                     <button class="btn btn-filter" id="btnFilterInvitacionesWeb">Invitaciones Web (0)</button>
                     <button class="btn btn-filter" id="btnFilterDescartada">Descartadas (0)</button>
-                    <button class="btn btn-filter" id="btnFilterSinClasificar">Sin Clasificar (457)</button>
+                    <button class="btn btn-filter" id="btnFilterSinClasificar">Sin Clasificar (460)</button>
                 </div>
 
                 <div class="action-buttons secondary">
@@ -745,7 +745,7 @@
                         id="photoNumber"
                         placeholder="# Foto"
                         min="1"
-                        max="457"
+                        max="460"
                         style="flex: 0 0 100px; padding: 12px; border: 2px solid var(--primary-light); border-radius: 10px; background: rgba(255, 255, 255, 0.1); color: var(--cream); font-size: 1rem;"
                     >
                     <input
@@ -781,30 +781,5 @@
     </footer>
 
     <script src="js/selector.js"></script>
-    <script>
-        // Disable right-click on images
-        document.addEventListener('contextmenu', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-                return false;
-            }
-        });
-
-        // Disable dragging of images
-        document.addEventListener('dragstart', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-                return false;
-            }
-        });
-
-        // Disable common keyboard shortcuts for saving images
-        document.addEventListener('keydown', function(e) {
-            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                e.preventDefault();
-                return false;
-            }
-        });
-    </script>
 </body>
 </html>
