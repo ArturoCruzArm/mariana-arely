@@ -146,15 +146,11 @@ let currentFilter = 'all';
 function loadSelections() {
     try {
         const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-            photoSelections = JSON.parse(saved);
-            console.log('Selecciones cargadas:', photoSelections);
-        } else {
-            photoSelections = Object.assign({}, DEFAULT_SELECTIONS);
-        }
+        photoSelections = Object.assign({}, DEFAULT_SELECTIONS, saved ? JSON.parse(saved) : {});
+        console.log('Selecciones cargadas:', photoSelections);
     } catch (error) {
         console.error('Error cargando selecciones:', error);
-        photoSelections = {};
+        photoSelections = Object.assign({}, DEFAULT_SELECTIONS);
     }
 }
 
