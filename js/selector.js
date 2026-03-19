@@ -130,6 +130,12 @@ const LIMITS = {
     impresion: 100
 };
 
+// Selecciones predefinidas de Lucy (índice = numero_foto - 1)
+const DEFAULT_SELECTIONS = {};
+[1,3,18,30,37,39,50,54,69,71,77,78,80,81,82,83,84,85,86,88,89,90,95,104,108,109,110,121,124,125,129,132,136,137,139].forEach(n => {
+    DEFAULT_SELECTIONS[n - 1] = { impresion: true, redes_sociales: false, invitaciones_web: false, descartada: false };
+});
+
 let photoSelections = {};
 let currentPhotoIndex = null;
 let currentFilter = 'all';
@@ -143,6 +149,8 @@ function loadSelections() {
         if (saved) {
             photoSelections = JSON.parse(saved);
             console.log('Selecciones cargadas:', photoSelections);
+        } else {
+            photoSelections = Object.assign({}, DEFAULT_SELECTIONS);
         }
     } catch (error) {
         console.error('Error cargando selecciones:', error);
@@ -516,12 +524,16 @@ function exportToJSON() {
     });
 
     const jsonText = JSON.stringify(exportData, null, 2);
-    const message = `👑 SELECCIÓN DE FOTOS - XV AÑOS MARIANA & ARELI\n\n${jsonText}`;
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappURL = `https://wa.me/524779203776?text=${encodedMessage}`;
-
-    window.open(whatsappURL, '_blank');
-    showToast('Abriendo WhatsApp para enviar reporte...', 'success');
+    const blob = new Blob([jsonText], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'seleccion-fotos-mariana-areli.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Reporte descargado. Envía el archivo por WhatsApp.', 'success');
 }
 
 function generateTextSummary() {
@@ -575,20 +587,29 @@ function generateTextSummary() {
 }
 
 function copyToClipboard() {
-    const summary = generateTextSummary();
+    const compact = { impresion: [], redes_sociales: [], invitaciones_web: [], descartada: [] };
+    photos.forEach((_, index) => {
+        const s = photoSelections[index];
+        if (!s) return;
+        if (s.impresion) compact.impresion.push(index + 1);
+        if (s.redes_sociales) compact.redes_sociales.push(index + 1);
+        if (s.invitaciones_web) compact.invitaciones_web.push(index + 1);
+        if (s.descartada) compact.descartada.push(index + 1);
+    });
+    const text = JSON.stringify(compact);
 
-    navigator.clipboard.writeText(summary).then(() => {
-        showToast('Resumen copiado al portapapeles', 'success');
+    navigator.clipboard.writeText(text).then(() => {
+        showToast('Selección copiada al portapapeles', 'success');
     }).catch(() => {
         const textarea = document.createElement('textarea');
-        textarea.value = summary;
+        textarea.value = text;
         textarea.style.position = 'fixed';
         textarea.style.opacity = '0';
         document.body.appendChild(textarea);
         textarea.select();
         document.execCommand('copy');
         document.body.removeChild(textarea);
-        showToast('Resumen copiado al portapapeles', 'success');
+        showToast('Selección copiada al portapapeles', 'success');
     });
 }
 
@@ -741,6 +762,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (category !== 'descartada' && !isCurrentlySelected) {
                 const descartadaBtn = document.querySelector('.option-btn[data-category="descartada"]');
                 if (descartadaBtn) descartadaBtn.classList.remove('selected');
+            }
+
+            if (category === 'impresion' && !isCurrentlySelected && getStats().impresion >= LIMITS.impresion) {
+                showToast(`Ya tienes ${LIMITS.impresion} fotos para impresión (límite del paquete)`, 'error');
+                return;
             }
 
             btn.classList.toggle('selected');
